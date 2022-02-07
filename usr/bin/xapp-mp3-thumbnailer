@@ -35,7 +35,7 @@ if height >= width:
 else:
     percent = size / float(width)
     hsize = int((float(height) * float(percent)))
-    img = img.resize((size, hsize), Image.ANTIALIAS)
+    img = img.resize((size, hsize), PIL.Image.ANTIALIAS)
 img.save(destination_path)
 
 # Remove tmp file
