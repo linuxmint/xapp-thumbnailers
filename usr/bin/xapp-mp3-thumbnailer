@@ -1,36 +1,11 @@
 #!/usr/bin/python3
 
-import argparse
 import eyed3
-import os
-import PIL.Image
-import sys
-from io import BytesIO
+import XappThumbnailers
 
-# Parse arguments
-parser = argparse.ArgumentParser()
-parser.add_argument('-i', '--input', type=str, required=True)
-parser.add_argument('-o', '--output', type=str, required=True)
-parser.add_argument('-s', '--size', type=int, required=True)
-args = parser.parse_args()
-size = args.size
+thumbnailer = XappThumbnailers.Thumbnailer()
 
-if not os.path.exists(args.input):
-    print("File not found ", args.input)
-    sys.exit(1)
-
-audio_file = eyed3.load(args.input)
-if audio_file.tag != None and len(audio_file.tag.images) > 0:
-    image = audio_file.tag.images[0]
-    img = PIL.Image.open(BytesIO(image.image_data))
-    width, height = img.size
-    if height >= width:
-        percent = size / float(height)
-        wsize = int((float(width) * float(percent)))
-        img = img.resize((wsize, size), PIL.Image.ANTIALIAS)
-    else:
-        percent = size / float(width)
-        hsize = int((float(height) * float(percent)))
-        img = img.resize((size, hsize), PIL.Image.ANTIALIAS)
-    img.save(args.output, "PNG")
-
+audio_file = eyed3.load(thumbnailer.args.input)
+if audio_file.tag != None:
+    if audio_file.tag.images != None and len(audio_file.tag.images) > 0:
+        thumbnailer.save_bytes(audio_file.tag.images[0].image_data)

@@ -6,10 +6,20 @@ Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.6
 Rules-Requires-Root: no
 
+Package: xapp-thumbnailers-common
+Architecture: all
+Depends: python3, python3-pil
+Description: Common files for XApp thumbnailers
+ Common files for XApp thumbnailers.
+
 Package: xapp-mp3-thumbnailer
 Architecture: all
-Depends: python3,
-         python3-eyed3,
-         python3-pil
+Depends: xapp-thumbnailers-common, python3-eyed3
 Description: MP3 thumbnailer
  Produces thumbnails for MP3 files.
+
+Package: xapp-epub-thumbnailer
+Architecture: all
+Depends: xapp-thumbnailers-common
+Description: ePub thumbnailer
+ Produces thumbnails for ePub files.
