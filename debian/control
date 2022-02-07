@@ -1,0 +1,15 @@
+Source: xapp-thumbnailers
+Section: gnome
+Priority: optional
+Maintainer: Linux Mint <root@linuxmint.com>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+Rules-Requires-Root: no
+
+Package: xapp-mp3-thumbnailer
+Architecture: all
+Depends: python3,
+         python3-eyed3,
+         python3-pil
+Description: MP3 thumbnailer
+ Produces thumbnails for MP3 files.

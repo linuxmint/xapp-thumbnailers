@@ -1,0 +1,42 @@
+#!/usr/bin/python3
+
+import argparse
+import eyed3
+import os
+import PIL.Image
+
+# Parse arguments
+parser = argparse.ArgumentParser()
+parser.add_argument('-i', '--input', type=str, required=True)
+parser.add_argument('-o', '--output', type=str, required=True)
+parser.add_argument('-s', '--size', type=int, required=True)
+args = parser.parse_args()
+source_path = args.input
+destination_path = args.output
+tmp_path = f"{destination_path}.tmp"
+size = args.size
+
+# Write thumbnail
+audio_file = eyed3.load(source_path)
+for image in audio_file.tag.images:
+    image_file = open(tmp_path, "wb")
+    image_file.write(image.image_data)
+    image_file.close()
+    break
+
+# Resize thumbnail
+img = PIL.Image.open(tmp_path)
+width, height = img.size
+new_width, new_heigh = img.size
+if height >= width:
+    percent = size / float(height)
+    wsize = int((float(width) * float(percent)))
+    img = img.resize((wsize, size), PIL.Image.ANTIALIAS)
+else:
+    percent = size / float(width)
+    hsize = int((float(height) * float(percent)))
+    img = img.resize((size, hsize), Image.ANTIALIAS)
+img.save(destination_path)
+
+# Remove tmp file
+os.unlink(tmp_path)

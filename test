@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo rm -rf /usr/lib/bin/xapp-*thumbnailer
+sudo rm -rf /usr/share/thumbnailers/xapp-*.thumbnailer
+sudo cp -R usr /

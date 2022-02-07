@@ -1,0 +1,4 @@
+[Thumbnailer Entry]
+TryExec=xapp-mp3-thumbnailer
+Exec=xapp-mp3-thumbnailer -i %i -o %o -s %s
+MimeType=video/jpeg;video/mp4;video/mpeg;video/quicktime;video/x-ms-asf;video/x-ms-wm;video/x-ms-wmv;video/x-msvideo;video/x-flv;video/x-matroska;video/webm;video/mp2t;
