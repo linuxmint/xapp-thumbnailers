@@ -3,8 +3,9 @@
 import argparse
 import eyed3
 import os
-import sys
 import PIL.Image
+import sys
+from io import BytesIO
 
 # Parse arguments
 parser = argparse.ArgumentParser()
@@ -12,28 +13,17 @@ parser.add_argument('-i', '--input', type=str, required=True)
 parser.add_argument('-o', '--output', type=str, required=True)
 parser.add_argument('-s', '--size', type=int, required=True)
 args = parser.parse_args()
-source_path = args.input
-destination_path = args.output
-pil_path = destination_path + ".png" # PIL wants a known extension to save the image
-tmp_path = destination_path + ".tmp"
 size = args.size
 
-if not os.path.exists(source_path):
-    print("File not found ", source_path)
+if not os.path.exists(args.input):
+    print("File not found ", args.input)
     sys.exit(1)
 
-# Write thumbnail
-audio_file = eyed3.load(source_path)
+audio_file = eyed3.load(args.input)
 if audio_file.tag != None and len(audio_file.tag.images) > 0:
     image = audio_file.tag.images[0]
-    image_file = open(tmp_path, "wb")
-    image_file.write(image.image_data)
-    image_file.close()
-
-    # Resize thumbnail
-    img = PIL.Image.open(tmp_path)
+    img = PIL.Image.open(BytesIO(image.image_data))
     width, height = img.size
-    new_width, new_heigh = img.size
     if height >= width:
         percent = size / float(height)
         wsize = int((float(width) * float(percent)))
@@ -42,8 +32,5 @@ if audio_file.tag != None and len(audio_file.tag.images) > 0:
         percent = size / float(width)
         hsize = int((float(height) * float(percent)))
         img = img.resize((size, hsize), PIL.Image.ANTIALIAS)
-    img.save(destination_path + ".png")
-    os.rename(destination_path + ".png", destination_path)
+    img.save(args.output, "PNG")
 
-    # Remove tmp file
-    os.unlink(tmp_path)
