@@ -26,6 +26,6 @@ Description: ePub thumbnailer
 
 Package: xapp-raw-thumbnailer
 Architecture: all
-Depends: xapp-thumbnailers-common
+Depends: xapp-thumbnailers-common, dcraw
 Description: RAW thumbnailer
  Produces thumbnails for RAW files.
