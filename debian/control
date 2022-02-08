@@ -23,3 +23,9 @@ Architecture: all
 Depends: xapp-thumbnailers-common
 Description: ePub thumbnailer
  Produces thumbnails for ePub files.
+
+Package: xapp-raw-thumbnailer
+Architecture: all
+Depends: xapp-thumbnailers-common
+Description: RAW thumbnailer
+ Produces thumbnails for RAW files.
