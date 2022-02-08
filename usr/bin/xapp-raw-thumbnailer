@@ -5,5 +5,7 @@ import subprocess
 
 import XappThumbnailers
 t = XappThumbnailers.Thumbnailer()
-
-subprocess.getoutput(f"dcraw -c -e -w '{t.args.input}' | convert -resize {t.args.size}x{t.args.size} - '{t.args.output}'")
+tmp_path = t.args.output + ".tmp.jpg"
+output = subprocess.getoutput(f"dcraw -c -e -w '{t.args.input}' > '{tmp_path}'")
+t.save_path(tmp_path)
+os.unlink(tmp_path)
