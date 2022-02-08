@@ -29,3 +29,9 @@ Architecture: all
 Depends: xapp-thumbnailers-common, dcraw
 Description: RAW thumbnailer
  Produces thumbnails for RAW files.
+
+Package: xapp-appimage-thumbnailer
+Architecture: all
+Depends: xapp-thumbnailers-common, python3-pyelftools, squashfs-tools
+Description: AppImage thumbnailer
+ Produces thumbnails for AppImage files.
