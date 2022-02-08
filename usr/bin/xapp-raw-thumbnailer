@@ -6,17 +6,4 @@ import subprocess
 import XappThumbnailers
 t = XappThumbnailers.Thumbnailer()
 
-angle = 0
-try:
-    orientation = subprocess.getoutput(f"exiftool -Orientation -s -s -s -n {t.args.input}")
-    if orientation == "3":
-        angle = 180
-    elif orientation == "6":
-        angle = 90
-    elif orientation == "8":
-        angle = 270
-except Exception as e:
-    print(e)
-
-command = f"dcraw -c -e -w {t.args.input} | convert -resize {t.args.size}x{t.args.size} -rotate {angle} - {t.args.output}"
-subprocess.getoutput(command)
+subprocess.getoutput(f"dcraw -c -e -w '{t.args.input}' | convert -resize {t.args.size}x{t.args.size} - '{t.args.output}'")
