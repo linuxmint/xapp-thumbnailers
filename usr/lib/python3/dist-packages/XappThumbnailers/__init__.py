@@ -1,6 +1,7 @@
 import argparse
 import os
 import PIL.Image
+import PIL.ImageOps
 import sys
 from io import BytesIO
 
@@ -27,6 +28,7 @@ class Thumbnailer():
         self.save_pil(img)
 
     def save_pil(self, img):
+        # Resize image
         width, height = img.size
         if height >= width:
             percent = self.args.size / float(height)
@@ -36,4 +38,9 @@ class Thumbnailer():
             percent = self.args.size / float(width)
             hsize = int((float(height) * float(percent)))
             img = img.resize((self.args.size, hsize), PIL.Image.ANTIALIAS)
+        # Rotate image according to its EXIF rotation tag
+        try:
+            img = PIL.ImageOps.exif_transpose(img)
+        except Exception as e:
+            print(e)
         img.save(self.args.output, "PNG")
