@@ -1,0 +1,6 @@
+option('py3modules_dir',
+    type : 'string',
+    value : '',
+    description: 'Where to install python3 modules'
+)
+

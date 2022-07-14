@@ -2,7 +2,9 @@ Source: xapp-thumbnailers
 Section: gnome
 Priority: optional
 Maintainer: Linux Mint <root@linuxmint.com>
-Build-Depends: debhelper (>= 9)
+Build-Depends: debhelper (>= 9),
+ dh-python,
+ meson
 Standards-Version: 3.9.6
 Rules-Requires-Root: no
 
