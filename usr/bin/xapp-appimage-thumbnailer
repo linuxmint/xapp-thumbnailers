@@ -22,11 +22,21 @@ f.close()
 
 # Find the location of the icon inside the squashfs
 icon_path = None
-output = subprocess.getoutput(f"unsquashfs -o {app_image_offset} -ll '{t.args.input}' | grep .DirIcon")
-for line in output.split("\n"):
-    if "-> " in line:
-        icon_path = line.strip().split("-> ")[1]
-        break
+status, output = subprocess.getstatusoutput(f"unsquashfs -o {app_image_offset} -ll '{t.args.input}' | grep '.DirIcon -> '")
+
+# Case where .DirIcon is an image or is missing
+if status != 0:
+    status, output = subprocess.getstatusoutput(f"unsquashfs -o {app_image_offset} -ll '{t.args.input}' | grep .DirIcon")
+    icon_path = ".DirIcon" if status == 0 else None
+
+# Case where .DirIcon is a symlink or symlink chain
+else:
+    while "-> " in output:
+        icon_path = output.strip().split("-> ")[1]
+        # Some appimages use local apppimage paths, e.g., ./usr/applications/...
+        if icon_path[0:2] == "./":
+            icon_path = icon_path[2:]
+        output = subprocess.getoutput(f"unsquashfs -o {app_image_offset} -ll '{t.args.input}' | grep '{icon_path} -> '")
 
 # Extract the icon
 if icon_path != None:
