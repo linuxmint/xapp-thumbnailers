@@ -1,0 +1,34 @@
+#!/usr/bin/python3
+"""Extracts the album cover of FLAC and OGG files using the mutagen library.
+Other supported formats could be added in future.
+
+Ref: https://mutagen.readthedocs.io/en/latest/user/vcomment.html
+"""
+import base64
+import mutagen
+from mutagen.flac import FLAC, Picture
+from mutagen.ogg import OggFileType
+import sys
+
+from XappThumbnailers import Thumbnailer
+
+thumbnailer = Thumbnailer()
+
+try:
+    filename = thumbnailer.args.input
+    file = mutagen.File(filename=filename)
+    cover_bytes: bytes
+
+    if isinstance(file, FLAC):
+        cover_bytes = file.pictures[0].data
+    elif isinstance(file, OggFileType):
+        cover_b64 = file.get('metadata_block_picture', [None])[0]
+        if not cover_b64:
+            cover_b64 = file.get('coverart', [None])[0]  # check legacy attrib
+        cover_bytes = Picture(base64.b64decode(cover_b64)).data
+    else:
+        sys.exit(1)
+
+    thumbnailer.save_bytes(cover_bytes)
+except Exception:
+    sys.exit(1)

@@ -1,0 +1,4 @@
+[Thumbnailer Entry]
+TryExec=xapp-vorbiscomment-thumbnailer
+Exec=xapp-vorbiscomment-thumbnailer -i %i -o %o -s %s
+MimeType=audio/flac;audio/ogg;x-flac+ogg.xml;audio/x-opus+ogg;x-speex+ogg.xml;audio/x-vorbis+ogg
