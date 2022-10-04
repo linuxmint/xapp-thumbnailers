@@ -30,6 +30,13 @@ Depends: xapp-thumbnailers-common, dcraw
 Description: RAW thumbnailer
  Produces thumbnails for RAW files.
 
+Package: xapp-vorbiscomment-thumbnailer
+Architecture: all
+Depends: xapp-thumbnailers-common, python3-mutagen
+Description: VorbisComment thumbnailer
+ Produces thumbnails for audio files with VorbisComment metadata,
+ such as FLAC and Ogg files.
+
 Package: xapp-appimage-thumbnailer
 Architecture: all
 Depends: xapp-thumbnailers-common, python3-pyelftools, squashfs-tools
