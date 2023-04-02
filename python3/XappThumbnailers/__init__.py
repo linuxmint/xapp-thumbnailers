@@ -24,13 +24,15 @@ class Thumbnailer():
             sys.exit(1)
 
     def save_path(self, path):
+        img = None
+
         if path.endswith(".svg"):
             img = self.svg_to_image(path)
         else:
             try:
                 img = PIL.Image.open(path)
             except (PIL.UnidentifiedImageError, FileNotFoundError) as e:
-                print("PIL ERROR: ", e)
+                print("xapp-thumbnails PIL load error: ", e)
 
         if img:
             self.save_pil(img)
@@ -77,4 +79,4 @@ class Thumbnailer():
             image = PIL.Image.frombytes(mode, (w, h), data, "raw", mode, stride)
             return image
         except Exception as e:
-            print("SVG Error:", e)
+            print("xapp-thumbnails svg to PIL error:", e)
