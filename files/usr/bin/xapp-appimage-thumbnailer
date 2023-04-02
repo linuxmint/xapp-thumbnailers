@@ -3,6 +3,7 @@
 import os
 import random
 import subprocess
+import sys
 from elftools.elf.elffile import ELFFile
 
 import XappThumbnailers
@@ -44,6 +45,8 @@ if icon_path != None:
     cmd = f"unsquashfs -o {app_image_offset} -e files '{t.args.input}'"
     output = subprocess.getoutput(cmd)
     icon_path = os.path.join(TMP_DIR, "squashfs-root", icon_path)
-    t.save_path(icon_path)
+    success = t.save_path(icon_path)
     os.system(f"rm -rf '{TMP_DIR}'")
+    sys.exit(0 if success else 1)
 
+sys.exit(1)

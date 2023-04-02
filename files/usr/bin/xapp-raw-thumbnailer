@@ -2,10 +2,19 @@
 
 import os
 import subprocess
+import sys
 
 import XappThumbnailers
 t = XappThumbnailers.Thumbnailer()
 tmp_path = t.args.output + ".tmp.jpg"
-output = subprocess.getoutput(f"dcraw -c -e -w '{t.args.input}' > '{tmp_path}'")
-t.save_path(tmp_path)
+
+try:
+    cproc = subprocess.run(f"dcraw -c -e -w '{t.args.input}' > '{tmp_path}'", check=True, shell=True)
+except subprocess.CalledProcessError as e:
+    print(e)
+    sys.exit(1)
+
+success = t.save_path(tmp_path)
 os.unlink(tmp_path)
+
+sys.exit(0 if success else 1)

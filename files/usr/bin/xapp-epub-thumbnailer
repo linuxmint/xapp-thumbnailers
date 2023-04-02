@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import os
+import sys
 import zipfile
 from xml.dom import minidom
 
@@ -40,3 +41,6 @@ if cover_path != None:
     cover_path = os.path.join(os.path.dirname(root_path), cover_path)
     cover = archive.open(cover_path)
     thumbnailer.save_bytes(cover.read())
+    sys.exit(0)
+
+sys.exit(1)

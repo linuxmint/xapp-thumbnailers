@@ -5,6 +5,10 @@ import PIL.ImageOps
 import sys
 from io import BytesIO
 
+import gi
+gi.require_version('GdkPixbuf', '2.0') 
+from gi.repository import GdkPixbuf
+
 class Thumbnailer():
 
     def __init__(self):
@@ -20,8 +24,19 @@ class Thumbnailer():
             sys.exit(1)
 
     def save_path(self, path):
-        img = PIL.Image.open(path)
-        self.save_pil(img)
+        if path.endswith(".svg"):
+            img = self.svg_to_image(path)
+        else:
+            try:
+                img = PIL.Image.open(path)
+            except (PIL.UnidentifiedImageError, FileNotFoundError) as e:
+                print("PIL ERROR: ", e)
+
+        if img:
+            self.save_pil(img)
+            return True
+
+        return False
 
     def save_bytes(self, data):
         img = PIL.Image.open(BytesIO(data))
@@ -44,3 +59,22 @@ class Thumbnailer():
         except Exception as e:
             print(e)
         img.save(self.args.output, "PNG")
+
+    def svg_to_image(self, path):
+        try:
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file(path)
+
+            data = pixbuf.get_pixels()
+
+            w = pixbuf.get_width()
+            h = pixbuf.get_height()
+            stride = pixbuf.get_rowstride()
+
+            mode = "RGB"
+            if pixbuf.get_has_alpha():
+                mode = "RGBA"
+
+            image = PIL.Image.frombytes(mode, (w, h), data, "raw", mode, stride)
+            return image
+        except Exception as e:
+            print("SVG Error:", e)
