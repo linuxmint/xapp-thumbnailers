@@ -1,3 +1,20 @@
+xapp-thumbnailers (1.2.0) victoria; urgency=medium
+
+  [ Ruan Formigoni ]
+  * appimage thumbnailer corner cases (#7)
+
+  [ Oliver Kästner ]
+  * feat: add thumbnailer for audio files with VorbisComment metadata (FLAC & Ogg) (#8)
+
+  [ Leigh Scott ]
+  * Use meson to install
+
+  [ Michael Webster ]
+  * Do a better job catching errors and exiting with the appropriate return code.
+  * Improve some error output.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 05 Jun 2023 14:06:25 +0100
+
 xapp-thumbnailers (1.0.1) elsie; urgency=medium
 
   * mp3: Fix mimetype in .desktop file
