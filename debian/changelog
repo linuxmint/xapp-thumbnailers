@@ -1,3 +1,10 @@
+xapp-thumbnailers (1.2.2) victoria; urgency=medium
+
+  [ cracrayol ]
+  * Add Panasonic RW2 support (#11)
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 21 Jul 2023 14:13:23 +0200
+
 xapp-thumbnailers (1.2.1) victoria; urgency=medium
 
   [ mstrand ]
