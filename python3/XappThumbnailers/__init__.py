@@ -50,11 +50,11 @@ class Thumbnailer():
         if height >= width:
             percent = self.args.size / float(height)
             wsize = int((float(width) * float(percent)))
-            img = img.resize((wsize, self.args.size), PIL.Image.ANTIALIAS)
+            img = img.resize((wsize, self.args.size), PIL.Image.LANCZOS)
         else:
             percent = self.args.size / float(width)
             hsize = int((float(height) * float(percent)))
-            img = img.resize((self.args.size, hsize), PIL.Image.ANTIALIAS)
+            img = img.resize((self.args.size, hsize), PIL.Image.LANCZOS)
         # Rotate image according to its EXIF rotation tag
         try:
             img = PIL.ImageOps.exif_transpose(img)
