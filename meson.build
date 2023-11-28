@@ -1,5 +1,5 @@
 project('xapp-thumbnailers',
-    version: '1.2.2',
+    version: '1.2.3',
     meson_version: '>=0.49.0'
 )
 

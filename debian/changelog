@@ -1,3 +1,10 @@
+xapp-thumbnailers (1.2.3) virginia; urgency=medium
+
+  [ Michael Webster ]
+  * Replace PIL.Image.ANTIALIAS with LANCZOS
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 28 Nov 2023 11:25:43 +0000
+
 xapp-thumbnailers (1.2.2) victoria; urgency=medium
 
   [ cracrayol ]
