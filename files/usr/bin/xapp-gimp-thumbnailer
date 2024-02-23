@@ -10,33 +10,40 @@ t = XappThumbnailers.Thumbnailer()
 
 # Adapted from https://askubuntu.com/questions/1250031/gimp-snap-and-thumbnails-for-xcf-files
 try:
-    output = subprocess.check_output([
+    output = subprocess.run(
+        [
         "gimp-console",
-        "-i",
+        "-i", # no-interface
+        "-d", # Don't load patterns, gradients, etc...
+        "-f", # No fonts
+        "-c", # Console messages only
+        "-s", # No splash
         "-b",
-            """
-             (let* ((image (car (gimp-file-load RUN-NONINTERACTIVE \"%s\" \"%s\")))
+            f"""
+             (let* ((image (car (gimp-file-load RUN-NONINTERACTIVE \"{t.args.input}\" \"{t.args.input}\")))
               (drawable   (car (gimp-image-active-drawable image)))
               (cur-width  (car (gimp-image-width image)))
               (cur-height (car (gimp-image-height image)))
-              (ratio      (min (/ %d cur-width) (/ %d cur-height)))
+              (ratio      (min (/ {t.args.size} cur-width) (/ {t.args.size} cur-height)))
               (width      (* ratio cur-width))
               (height     (* ratio cur-height))
              )
 
              (gimp-image-scale image width height)
-             (file-png-save2 RUN-NONINTERACTIVE image drawable \"%s\" \"%s\" 0 9 0 0 0 0 0 0 0)
+             (file-png-save2 RUN-NONINTERACTIVE image drawable \"{t.args.output}\" \"{t.args.output}\" 0 9 0 0 0 0 0 0 0)
              (gimp-image-delete image)
              )
-            """ % (t.args.input, t.args.input, t.args.size, t.args.size, t.args.output, t.args.output),
+            """,
         "-b",
+            f"""
+             (gimp-quit 1)
             """
-             (gimp-quit 0)
-            """
-    ])
-
-except subprocess.CalledProcessError as e:
-    print(e)
+        ],
+        check=True,
+        capture_output=True
+    )
+except (subprocess.CalledProcessError) as e:
+    print("Thumbnail generation failed: %s" % e)
     sys.exit(1)
 
 sys.exit(0)
