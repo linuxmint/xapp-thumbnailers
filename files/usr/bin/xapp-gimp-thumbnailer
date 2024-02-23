@@ -1,0 +1,43 @@
+#!/usr/bin/python3
+
+import os
+import subprocess
+import sys
+import time
+
+import XappThumbnailers
+t = XappThumbnailers.Thumbnailer()
+
+# Adapted from https://askubuntu.com/questions/1250031/gimp-snap-and-thumbnails-for-xcf-files
+try:
+    output = subprocess.check_output([
+        "gimp-console",
+        "-i",
+        "-b",
+            """
+             (let* ((image (car (gimp-file-load RUN-NONINTERACTIVE \"%s\" \"%s\")))
+              (drawable   (car (gimp-image-active-drawable image)))
+              (cur-width  (car (gimp-image-width image)))
+              (cur-height (car (gimp-image-height image)))
+              (ratio      (min (/ %d cur-width) (/ %d cur-height)))
+              (width      (* ratio cur-width))
+              (height     (* ratio cur-height))
+             )
+
+             (gimp-image-scale image width height)
+             (file-png-save2 RUN-NONINTERACTIVE image drawable \"%s\" \"%s\" 0 9 0 0 0 0 0 0 0)
+             (gimp-image-delete image)
+             )
+            """ % (t.args.input, t.args.input, t.args.size, t.args.size, t.args.output, t.args.output),
+        "-b",
+            """
+             (gimp-quit 0)
+            """
+    ])
+
+except subprocess.CalledProcessError as e:
+    print(e)
+    sys.exit(1)
+
+sys.exit(0)
+

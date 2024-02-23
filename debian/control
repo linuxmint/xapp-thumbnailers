@@ -44,3 +44,9 @@ Architecture: all
 Depends: xapp-thumbnailers-common, python3-pyelftools, squashfs-tools
 Description: AppImage thumbnailer
  Produces thumbnails for AppImage files.
+
+Package: xapp-gimp-thumbnailer
+Architecture: all
+Depends: xapp-thumbnailers-common
+Description: Gimp thumbnailer
+ Produces thumbnails for Gimp xcf files.
