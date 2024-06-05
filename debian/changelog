@@ -1,3 +1,12 @@
+xapp-thumbnailers (1.2.4) wilma; urgency=medium
+
+  [ Michael Webster ]
+  * Add gimp thumbnailer.
+  * xapp-gimp-thumbnailer: Clean up, use f-strings, don't let gimp load unnecessary resources, add xcursor to supported mimetypes.
+  * Add build workflow.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 05 Jun 2024 15:21:16 +0100
+
 xapp-thumbnailers (1.2.3) virginia; urgency=medium
 
   [ Michael Webster ]
