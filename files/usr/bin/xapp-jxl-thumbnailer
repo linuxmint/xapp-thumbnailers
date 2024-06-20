@@ -1,0 +1,27 @@
+#!/usr/bin/python3
+
+import os
+import subprocess
+import sys
+import tempfile
+import gi
+
+gi.require_version("XApp", "1.0")
+from gi.repository import XApp, GdkPixbuf, GLib
+
+import XappThumbnailers
+t = XappThumbnailers.Thumbnailer()
+
+try:
+    with tempfile.NamedTemporaryFile(dir=XApp.get_tmp_dir(), suffix=".png") as tempf:
+        output = subprocess.check_output([
+            "djxl", "--bits_per_sample", "16", "--num_threads", "1", "--quiet", t.args.input, tempf.name
+        ])
+
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(tempf.name, t.args.size, t.args.size, True)
+        pixbuf.savev(t.args.output, "png")
+except Exception as e:
+    print("Could not generate thumbnail for '%s': %s" % (t.args.input, e), file=sys.stderr, flush=True)
+    sys.exit(1)
+
+sys.exit(0)

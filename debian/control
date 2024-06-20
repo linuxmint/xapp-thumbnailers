@@ -10,7 +10,7 @@ Rules-Requires-Root: no
 
 Package: xapp-thumbnailers-common
 Architecture: all
-Depends: python3, python3-pil
+Depends: python3, python3-pil, gir1.2-xapp-1.0 (>= 2.4.2)
 Description: Common files for XApp thumbnailers
  Common files for XApp thumbnailers.
 
@@ -25,6 +25,12 @@ Architecture: all
 Depends: xapp-thumbnailers-common
 Description: ePub thumbnailer
  Produces thumbnails for ePub files.
+
+Package: xapp-jxl-thumbnailer
+Architecture: all
+Depends: xapp-thumbnailers-common, libjxl-tools
+Description: JPEG XL thumbnailer
+ Produces thumbnails for JPEG XL files.
 
 Package: xapp-raw-thumbnailer
 Architecture: all

@@ -1,0 +1,4 @@
+[Thumbnailer Entry]
+TryExec=xapp-jxl-thumbnailer
+Exec=xapp-jxl-thumbnailer -i %i -o %o -s %s
+MimeType=image/jxl;
