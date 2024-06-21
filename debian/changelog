@@ -1,3 +1,10 @@
+xapp-thumbnailers (1.2.5) wilma; urgency=medium
+
+  [ Michael Webster ]
+  * Add JPEG XL thumbnailer.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 21 Jun 2024 17:01:23 +0100
+
 xapp-thumbnailers (1.2.4) wilma; urgency=medium
 
   [ Michael Webster ]
