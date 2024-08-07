@@ -6,6 +6,9 @@ import sys
 import tempfile
 from elftools.elf.elffile import ELFFile
 
+gi.require_version("XApp", "1.0")
+from gi.repository import XApp
+
 import XappThumbnailers
 t = XappThumbnailers.Thumbnailer()
 
@@ -42,7 +45,7 @@ while True:
         icon_path = icon_path[2:]
 
 # Extract the icon
-with tempfile.TemporaryDirectory() as tmpdir:
+with tempfile.TemporaryDirectory(dir=XApp.get_tmp_dir()) as tmpdir:
     outdir = os.path.join(tmpdir, 'out')
     cmd = [
             'unsquashfs',
