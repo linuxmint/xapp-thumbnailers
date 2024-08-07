@@ -1,0 +1,4 @@
+[Thumbnailer Entry]
+TryExec=xapp-ora-thumbnailer
+Exec=xapp-ora-thumbnailer -i %i -o %o -s %s
+MimeType=image/openraster;

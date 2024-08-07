@@ -56,3 +56,10 @@ Architecture: all
 Depends: xapp-thumbnailers-common
 Description: Gimp thumbnailer
  Produces thumbnails for Gimp xcf files.
+
+Package: xapp-ora-thumbnailer
+Architecture: all
+Depends: xapp-thumbnailers-common
+Description: OpenRaster thumbnailer
+ Produces thumbnails for OpenRaster (.ora) files.
+
