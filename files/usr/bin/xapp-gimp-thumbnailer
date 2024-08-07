@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 
-import os
 import subprocess
 import sys
-import time
 
 import XappThumbnailers
 t = XappThumbnailers.Thumbnailer()
@@ -35,7 +33,7 @@ try:
              )
             """,
         "-b",
-            f"""
+            """
              (gimp-quit 1)
             """
         ],

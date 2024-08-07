@@ -11,7 +11,7 @@ try:
     if audio_file.tag.images != None and len(audio_file.tag.images) > 0:
         thumbnailer.save_bytes(audio_file.tag.images[0].image_data)
         sys.exit(0)
-except AttributeError as e: # (audio_file is None)
+except AttributeError: # (audio_file is None)
     pass
 except Exception as e:
     print(e)

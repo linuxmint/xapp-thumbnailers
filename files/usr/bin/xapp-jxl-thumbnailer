@@ -1,13 +1,12 @@
 #!/usr/bin/python3
 
-import os
 import subprocess
 import sys
 import tempfile
 import gi
 
 gi.require_version("XApp", "1.0")
-from gi.repository import XApp, GdkPixbuf, GLib
+from gi.repository import XApp, GdkPixbuf
 
 import XappThumbnailers
 t = XappThumbnailers.Thumbnailer()
