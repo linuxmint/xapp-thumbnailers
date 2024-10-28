@@ -6,6 +6,7 @@ import sys
 import tempfile
 from elftools.elf.elffile import ELFFile
 
+import gi
 gi.require_version("XApp", "1.0")
 from gi.repository import XApp
 
