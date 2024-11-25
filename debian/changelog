@@ -1,3 +1,13 @@
+xapp-thumbnailers (1.2.6) xia; urgency=medium
+
+  [ Michael Webster ]
+  * Cleanup some pyflakes complaints.
+  * xapp-appimage-thumbnailer: Use XApp.get_tmp_dir()
+  * Add OpenRaster (.ora) thumbnailer.
+  * xapp-appimage-thumbnailer: Add missing import.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 25 Nov 2024 11:58:00 +0000
+
 xapp-thumbnailers (1.2.5) wilma; urgency=medium
 
   [ Michael Webster ]
