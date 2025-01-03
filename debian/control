@@ -66,5 +66,5 @@ Description: OpenRaster thumbnailer
 Package: xapp-aiff-thumbnailer
 Architecture: all
 Depends: xapp-thumbnailers-common, python3-mutagen
-Description: AppImage thumbnailer
- Produces thumbnails for AppImage files.
+Description: AIFF thumbnailer
+ Produces thumbnails for aiff files.
