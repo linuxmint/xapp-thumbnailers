@@ -1,0 +1,32 @@
+#!/usr/bin/python3
+import sys
+from pathlib import Path
+from typing import cast
+
+from mutagen.aiff import AIFF
+from XappThumbnailers import Thumbnailer
+
+thumbnailer = Thumbnailer()
+
+
+def extract_cover_aiff_file(filepath: Path) -> bytes | None:
+    if not filepath.is_file() or not filepath.suffix == ".aiff":
+        return None
+    aiff_file: AIFF = AIFF(str(filepath))
+    if aiff_file.tags is None:
+        return None
+    try:
+        return cast(bytes, aiff_file.tags.getall("APIC")[0].data)
+    except:
+        pass
+    finally:
+        return None
+
+
+try:
+    cover_data: bytes | None = extract_cover_aiff_file(filepath=Path(thumbnailer.args.input))
+    if cover_data is not None:
+        thumbnailer.save_bytes(data=cover_data)
+    sys.exit(0)
+except:
+    sys.exit(1)
