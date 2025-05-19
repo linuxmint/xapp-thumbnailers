@@ -63,3 +63,8 @@ Depends: xapp-thumbnailers-common
 Description: OpenRaster thumbnailer
  Produces thumbnails for OpenRaster (.ora) files.
 
+Package: xapp-aiff-thumbnailer
+Architecture: all
+Depends: xapp-thumbnailers-common, python3-mutagen
+Description: AIFF thumbnailer
+ Produces thumbnails for aiff files.
