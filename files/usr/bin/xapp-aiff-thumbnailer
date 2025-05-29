@@ -18,8 +18,6 @@ def extract_cover_aiff_file(filepath: Path) -> bytes | None:
     try:
         return cast(bytes, aiff_file.tags.getall("APIC")[0].data)
     except:
-        pass
-    finally:
         return None
 
 
