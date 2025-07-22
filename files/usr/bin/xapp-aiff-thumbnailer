@@ -10,12 +10,12 @@ thumbnailer = Thumbnailer()
 
 
 def extract_cover_aiff_file(filepath: Path) -> bytes | None:
-    if not filepath.is_file() or not filepath.suffix == ".aiff":
-        return None
-    aiff_file: AIFF = AIFF(str(filepath))
-    if aiff_file.tags is None:
-        return None
     try:
+        if not filepath.is_file() or not filepath.suffix.lower() == ".aiff":
+            return None
+        aiff_file: AIFF = AIFF(str(filepath))
+        if aiff_file.tags is None:
+            return None
         return cast(bytes, aiff_file.tags.getall("APIC")[0].data)
     except:
         return None
