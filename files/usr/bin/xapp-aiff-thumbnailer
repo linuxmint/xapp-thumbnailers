@@ -14,7 +14,7 @@ def extract_cover_aiff_file(filepath: Path) -> bytes | None:
         aiff_file: AIFF = AIFF(str(filepath))
         if aiff_file.tags is None:
             return None
-        return cast(bytes, aiff_file.tags.getall("APIC")[0].data)
+        return cast(bytes, aiff_file.tags.getall(key="APIC")[0].data)
     except:
         return None
 
