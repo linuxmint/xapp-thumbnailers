@@ -1,4 +1,4 @@
 [Thumbnailer Entry]
 TryExec=xapp-aiff-thumbnailer
 Exec=xapp-aiff-thumbnailer -i %i -o %o -s %s
-MimeType=audio/x-aiff
+MimeType=audio/x-aiff;audio/aiff
