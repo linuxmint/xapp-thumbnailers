@@ -1,3 +1,12 @@
+xapp-thumbnailers (1.2.7) zara; urgency=medium
+
+  [ Ahsan David Pérez Bermúdez ]
+  * Adding thumbnailer for .aiff files (#15)
+  * Fix bug in aiff extractor (#16)
+  * Another improvement to aiff thumbnailer (#18)
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 22 Jul 2025 15:19:44 +0200
+
 xapp-thumbnailers (1.2.6) xia; urgency=medium
 
   [ Michael Webster ]

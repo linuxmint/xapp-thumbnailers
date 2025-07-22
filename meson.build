@@ -1,4 +1,4 @@
-project('xapp-thumbnailers', version : '1.2.6', meson_version : '>=0.49.0')
+project('xapp-thumbnailers', version : '1.2.7', meson_version : '>=0.49.0')
 
 project_url = 'https://github.com/linuxmint/xapp-thumbnailers'
 version = meson.project_version()
