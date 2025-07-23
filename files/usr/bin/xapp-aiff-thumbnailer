@@ -23,6 +23,7 @@ try:
     cover_data: bytes | None = extract_cover_aiff_file(filepath=Path(thumbnailer.args.input))
     if cover_data is not None:
         thumbnailer.save_bytes(data=cover_data)
-    sys.exit(0)
-except:
+except Exception:
     sys.exit(1)
+
+sys.exit(0)
