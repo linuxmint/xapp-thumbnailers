@@ -11,6 +11,7 @@ All file managers which are compatible with `/usr/share/thumbnailers` thumbnaile
 - [Nautilus (GNOME)](https://gitlab.gnome.org/GNOME/nautilus)
 - [Nemo (Cinnamon)](https://github.com/linuxmint/nemo)
 - [PCManFM (LXDE)](https://github.com/lxde/pcmanfm)
+- [PCManFM-Qt (LXQt)](https://github.com/lxqt/pcmanfm-qt)
 - [Thunar (Xfce)](https://gitlab.xfce.org/xfce/thunar)
 
 So far the following file types are supported:
@@ -19,3 +20,4 @@ So far the following file types are supported:
 - **ePub** (compressed as ZIP, with a cover specified as a `cover-image` property, or a `cover` meta tag).
 - **MP3** (with album art specified in their ID3 images tag)
 - **RAW** (compatible with dcraw)
+- **aiff** (for audio files with cover art embedded in their tags)
