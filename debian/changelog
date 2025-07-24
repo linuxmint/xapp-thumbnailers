@@ -1,3 +1,13 @@
+xapp-thumbnailers (1.2.8) zara; urgency=medium
+
+  [ Ahsan David Pérez Bermúdez ]
+  * Updating MimeType and deleting checking the extension in the aiff thumbnailer (#19)
+
+  [ Michael Webster ]
+  * xapp-aiff-thumbnailer: Fix exit handling.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 24 Jul 2025 14:56:56 +0200
+
 xapp-thumbnailers (1.2.7) zara; urgency=medium
 
   [ Ahsan David Pérez Bermúdez ]
