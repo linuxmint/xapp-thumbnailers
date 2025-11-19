@@ -1,3 +1,9 @@
+xapp-thumbnailers (1.2.9) zena; urgency=medium
+
+  * Add .gitignore
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 19 Nov 2025 15:20:06 +0000
+
 xapp-thumbnailers (1.2.8) zara; urgency=medium
 
   [ Ahsan David Pérez Bermúdez ]
