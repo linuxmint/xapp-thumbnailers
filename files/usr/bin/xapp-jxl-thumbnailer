@@ -14,7 +14,7 @@ t = XappThumbnailers.Thumbnailer()
 try:
     with tempfile.NamedTemporaryFile(dir=XApp.get_tmp_dir(), suffix=".png") as tempf:
         output = subprocess.check_output([
-            "djxl", "--bits_per_sample", "16", "--num_threads", "1", "--quiet", t.args.input, tempf.name
+            "djxl", "--num_threads", "1", "--quiet", t.args.input, tempf.name
         ])
 
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(tempf.name, t.args.size, t.args.size, True)
