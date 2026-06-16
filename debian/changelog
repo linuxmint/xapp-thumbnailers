@@ -1,3 +1,13 @@
+xapp-thumbnailers (1.2.10) alfa; urgency=medium
+
+  [ NBA2K1 ]
+  * remove bits_per_size parameter (#22)
+
+  [ Michael Webster ]
+  * .github/workflows: Add generate-test-packages trigger.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 16 Jun 2026 17:13:51 +0200
+
 xapp-thumbnailers (1.2.9) zena; urgency=medium
 
   * Add .gitignore
