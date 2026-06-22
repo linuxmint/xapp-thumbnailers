@@ -17,8 +17,23 @@ t = XappThumbnailers.Thumbnailer()
 with open(t.args.input, 'rb') as f:
     elf = ELFFile(f)
     app_image_offset = elf['e_shoff'] + (elf['e_shentsize'] * elf['e_shnum'])
+    f.seek(app_image_offset)
+    payload_magic = f.read(6)
 
-def squashfs_lookup(filename):
+def lookup_icon(filename):
+    if payload_magic == b'DWARFS':
+        with tempfile.TemporaryDirectory(dir=XApp.get_tmp_dir()) as tmpdir:
+            extract_icon(tmpdir, filename)
+            path = os.path.join(tmpdir, filename)
+
+            if not os.path.exists(path) and not os.path.islink(path):
+                return ''
+
+            if os.path.islink(path):
+                return '%s -> %s' % (filename, os.readlink(path))
+
+            return filename
+
     return subprocess.check_output([
             'unsquashfs',
             '-o', str(app_image_offset),
@@ -27,10 +42,34 @@ def squashfs_lookup(filename):
             filename
         ]).decode()
 
-# Find the location of the icon inside the squashfs
+def extract_icon(outdir, filename):
+    if payload_magic == b'DWARFS':
+        os.mkdir(outdir)
+        cmd = [
+            'dwarfsextract',
+            '-i', t.args.input,
+            '-O', str(app_image_offset),
+            '-o', outdir,
+            '--pattern', filename,
+            '--skip-devices',
+            '--skip-specials',
+            '--log-level', 'error',
+        ]
+    else:
+        cmd = [
+            'unsquashfs',
+            '-o', str(app_image_offset),
+            '-d', outdir,
+            t.args.input,
+            filename,
+        ]
+
+    subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+# Find the location of the icon inside the AppImage payload
 icon_path = '.DirIcon'
 while True:
-    output = squashfs_lookup(icon_path)
+    output = lookup_icon(icon_path)
 
     if not output:
         # File not found, fail
@@ -48,14 +87,7 @@ while True:
 # Extract the icon
 with tempfile.TemporaryDirectory(dir=XApp.get_tmp_dir()) as tmpdir:
     outdir = os.path.join(tmpdir, 'out')
-    cmd = [
-            'unsquashfs',
-            '-o', str(app_image_offset),
-            '-d', outdir,
-            t.args.input,
-            icon_path,
-        ]
-    subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    extract_icon(outdir, icon_path)
     icon_path = os.path.join(outdir, icon_path)
     success = t.save_path(icon_path)
 sys.exit(0 if success else 1)

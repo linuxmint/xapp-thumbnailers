@@ -16,7 +16,7 @@ All file managers which are compatible with `/usr/share/thumbnailers` thumbnaile
 
 So far the following file types are supported:
 
-- **AppImage** (compressed as squashfs, with an icon linked from `.DirIcon`)
+- **AppImage** (compressed as SquashFS or DwarFS, with an icon linked from `.DirIcon`)
 - **ePub** (compressed as ZIP, with a cover specified as a `cover-image` property, or a `cover` meta tag).
 - **MP3** (with album art specified in their ID3 images tag)
 - **RAW** (compatible with dcraw)
